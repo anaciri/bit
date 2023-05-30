@@ -15,6 +15,14 @@ def update_config(json_baseline_file, json_changes_file):
     with open(json_changes_file, 'r') as f:
         changes_data = json.load(f)
 
+    # Apply changes to all MARKET_MAP entries if the key is "ALL"
+    if "MARKET_MAP" in changes_data and "ALL" in changes_data["MARKET_MAP"]:
+        all_changes = changes_data["MARKET_MAP"]["ALL"]
+        market_map = baseline_data.get("MARKET_MAP", {})
+        for key in market_map:
+            if key != "ALL":
+                market_map[key].update(all_changes)
+
     # Update the baseline data with the changes
     updated_data = recursive_merge(baseline_data, changes_data)
 
