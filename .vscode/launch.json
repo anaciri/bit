@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+
+    
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Py: twreport and config inputs",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "justMyCode": true,
+                "args": ["twreport.csv", "config.json"],
+                "cwd": "${workspaceFolder}"
+            },
+            {
+                "name": "pday-entry",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "justMyCode": true,
+                "args": ["baseline_config.json", "config_changes.json"],
+                "cwd": "${workspaceFolder}"
+            }
+        ]
+}
+    
