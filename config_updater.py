@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import csv
 import json
 import argparse
@@ -12,24 +10,16 @@ def update_config(csv_file, json_file):
     with open(json_file, 'r') as f:
         data = json.load(f)
 
-    # update collateral from twreport.csv
+    # Update collateral and basis margin from twreport.csv. use endCollat col as new START_COLLAT
     with open(input_file, 'r') as f:
         reader = csv.reader(f)
         next(reader)  # Skip the first row (header)
         for row in reader:
-            key, _, new_value, _ = row
-            new_value = float(new_value.strip())  # Strip leading/trailing whitespace characters
-            data['MARKET_MAP'][key]['START_COLLATERAL'] = new_value
-
-    # update margin rates from margin.csv
-    with open(input_file, 'r') as f:
-        reader = csv.reader(f)
-        next(reader)  # Skip the first row (header)
-        for row in reader:
-            key, _, new_value, _ = row
-            new_value = float(new_value.strip())  # Strip leading/trailing whitespace characters
-            data['MARKET_MAP'][key]['START_COLLATERAL'] = new_value
-
+            key, _, collateral, margin, _ = row
+            collateral = float(collateral.strip())
+            margin = float(margin.strip())
+            data['MARKET_MAP'][key]['START_COLLATERAL'] = collateral
+            data['MARKET_MAP'][key]['RESET_MARGIN'] = margin
 
     # Write the updated JSON data to the output file
     with open(output_file, 'w') as f:
