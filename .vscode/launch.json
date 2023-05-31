@@ -7,13 +7,13 @@
         "version": "0.2.0",
         "configurations": [
             {
-                "name": "Py: twreport and config inputs",
+                "name": "rebase-conf",
                 "type": "python",
                 "request": "launch",
                 "program": "${file}",
                 "console": "integratedTerminal",
                 "justMyCode": true,
-                "args": ["twreport.csv", "config.json"],
+                "args": ["twreport.csv", "config.json", "b"],
                 "cwd": "${workspaceFolder}"
             },
             {
