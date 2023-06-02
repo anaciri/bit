@@ -1,7 +1,9 @@
 #!/bin/bash
+#------------------------
+# Description: initiate the bolt protocol to suspend maxloss and hyperscale to reset stop-bolt-protocol.sh
+#------------------------
+# stop on failure
 set -e
-
-# initiate the bolt protocol to suspend maxloss and hyperscale to reset stop-bolt-protocol.sh
 
 # Check if the instance argument is provided
 if [ $# -ne 1 ]; then
@@ -10,7 +12,12 @@ if [ $# -ne 1 ]; then
 fi
 instance="$1"
 
+if [[ -z $BITSRCDIR ]]; then
+  echo "Error: BITSRCDIR env variable not set. MUST source bitenv.sh first."
+  exit 1
+fi
 cd "$BITSRCDIR" || exit 1
+
 
 # -- Stop pm2 instance
 # TODO
