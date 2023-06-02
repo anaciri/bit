@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # initiate the bolt protocol to suspend maxloss and hyperscale to reset stop-bolt-protocol.sh
 
@@ -18,19 +19,28 @@ cd "$BITSRCDIR" || exit 1
 
 # -- modify the instance config json
 
-# -- rebasis collat and margin from twreport
+# -- rebasis collat and margin from twreport into draft.config
 ./rebasis.py ../../../nol/twreport.csv ../../../nol/src/configs/"$instance"config.json "$instance"
 
-# Move the <instance>draft.config file
-read -rp "Copy and rename ${instance}draft.config to ../../../nol/src/configs/${instance}config.json? (Y/n) " choice
+# Move the <instance>draft.config file for further processing
+mv ${instance}draft.config ../../../nol/src/configs/
+
+# -- apply boltconf changes to draft
+./pday_conf.py ../protocolconfs/boltconf.json ../../../nol/src/configs/"$instance"draft.config
+echo "applying boltconf changes to ${instance}draft.config "
+# mv pdayconf.py output to configs dir
+mv ./confdraft.json ../../../nol/src/configs/${instance}protoconf.json
+
+# -- ready to overwrite config.json before restarting the instance in PM2
+read -rp "overwrite with backup ${instance}config.json with ${instance}protoconf.json? (Y/n) " choice
 
 case "$choice" in
   ""|Y|y)
     if [ -f "../../../nol/src/configs/${instance}config.json" ]; then
-      mv "../../../nol/src/configs/${instance}config.json" "../../../nol/src/configs/${instance}config.json.bkp"
+      cp "../../../nol/src/configs/${instance}config.json" "../../../nol/src/configs/${instance}config.json.bkp"
       echo "Existing config file backed up as ${instance}config.json.bkp"
     fi
-    cp "${instance}draft.config" "../../../nol/src/configs/${instance}config.json"
+    cp "${instance}protoconf.json" "../../../nol/src/configs/${instance}config.json"
     echo "config updated"
     ;;
   *)
