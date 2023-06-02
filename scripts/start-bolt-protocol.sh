@@ -19,14 +19,14 @@ cd "$BITSRCDIR" || exit 1
 
 # -- modify the instance config json
 
-# -- rebasis collat and margin from twreport into draft.config
+# -- Rebasis collat and margin from twreport into draft.config
 ./rebasis.py ../../../nol/twreport.csv ../../../nol/src/configs/"$instance"config.json "$instance"
 
 # Move the <instance>draft.config file for further processing
 mv ${instance}draft.config ../../../nol/src/configs/
 
-# -- apply boltconf changes to draft
-./pday_conf.py ../protocolconfs/boltconf.json ../../../nol/src/configs/"$instance"draft.config
+# -- Apply boltconf changes to draft (baseline) pday.py baseline changes
+./pday_conf.py ../../../nol/src/configs/"$instance"draft.config ../protocolconfs/boltconf.json
 echo "applying boltconf changes to ${instance}draft.config "
 # mv pdayconf.py output to configs dir
 mv ./confdraft.json ../../../nol/src/configs/${instance}protoconf.json
@@ -40,7 +40,7 @@ case "$choice" in
       cp "../../../nol/src/configs/${instance}config.json" "../../../nol/src/configs/${instance}config.json.bkp"
       echo "Existing config file backed up as ${instance}config.json.bkp"
     fi
-    cp "${instance}protoconf.json" "../../../nol/src/configs/${instance}config.json"
+    cp "../../../nol/src/configs/${instance}protoconf.json" "../../../nol/src/configs/${instance}config.json"
     echo "config updated"
     ;;
   *)

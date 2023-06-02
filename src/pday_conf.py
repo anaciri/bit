@@ -5,7 +5,7 @@ import json
 import argparse
 
 def update_config(json_baseline_file, json_changes_file):
-    output_file = 'pday-entry.json'
+    output_file = 'confdraft.json'
 
     # Read in the baseline JSON file
     with open(json_baseline_file, 'r') as f:
