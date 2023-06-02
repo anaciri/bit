@@ -1,0 +1,12 @@
+{
+    "PRICE_CHECK_INTERVAL_SEC": 30,
+    "TP_MAX_ROLL_LOSS": 0.01,
+    "TP_EXECUTION_HAIRCUT": 0.9,
+    "TP_MIN_FREE_COLLATERAL": 1.95,
+    "TP_MARGIN_STEP_INC": 0.02,
+    "MARKET_MAP": {
+        "ALL": {
+        "RESET_MARGIN": 0.110777
+        }
+    }
+}

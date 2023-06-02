@@ -1,0 +1,20 @@
+{
+    "PRICE_CHECK_INTERVAL_SEC": 90,
+    "TP_MAX_ROLL_LOSS": 0.79,
+    "TP_QRM_MIN_RET": 1.02,
+    "TP_QRM_FOR_MAX_LEVERAGE": 2,
+    "TP_EXECUTION_HAIRCUT": 0.88,
+    "TP_MIN_FREE_COLLATERAL": 1.99,
+    "TP_MARGIN_STEP_INC": 0.025,
+    "MARKET_MAP": {
+        "ALL": {
+            "RESET_MARGIN": 0.55
+        },
+        "vETH": {
+            "RESET_MARGIN": 0.30
+        },
+        "vBTC_SHORT": {
+            "RESET_MARGIN": 0.30
+        }
+    }
+}
