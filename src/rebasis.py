@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-
+""" updates START_COLLATERAL and RESET_MARGIN
+    inputs: twreport.csv baseline-config.json
+    output: <instance>draft.config
+"""
 import csv
 import json
 import argparse
