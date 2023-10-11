@@ -23,7 +23,7 @@ def update_config(csv_file, json_file, instance):
             key, collateral, _, fcb, _ = row
             #key, _, collateral, margin, _ = row
             collateral = float(collateral.strip())
-            margin = float(margin.strip())
+            fcb = float(fcb.strip())
             data['MARKET_MAP'][key]['START_COLLATERAL'] = collateral
             data['MARKET_MAP'][key]['FC_BASIS'] = fcb
 
